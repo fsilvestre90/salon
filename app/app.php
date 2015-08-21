@@ -21,7 +21,6 @@
 
         // display index webpage
         $app->get('/', function() use ($app) {
-
             return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
         });
 
@@ -48,6 +47,17 @@
             return $app['twig']->render('clients.html.twig', array('stylist' => $stylist, 'clients' => $clients));
         });
 
+        $app->get('/update_client/{id}', function($id) use ($app) {
+            $client = Client::find($id);
+            return $app['twig']->render('edit_client.html.twig', array('client' => $client));
+        });
+
+        $app->post('/update_client/{id}', function($id) use ($app) {
+            $client = Client::find($id);
+            $client->setClientName($_POST['client']);
+            $client->update();
+            return $app['twig']->render('edit_client.html.twig', array('client' => $client));
+        });
 
     return $app;
 

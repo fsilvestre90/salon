@@ -9,11 +9,14 @@
         <div class="viewClients">
             <h1>Hair Salon Management System</h1>
                 {% if clients is not empty %}
+                <p>
+                    Click on a client to edit their name
+                </p>
                 <h3>Current clients for {{ stylist.getStylistName }}:</h3>
                 <ul>
                     {% for client in clients %}
                         <div class="row">
-                            <li>{{ client.getClientName }}</li>
+                            <li><a href="/update_client/{{ client.getId }}">{{ client.getClientName }}</a></li>
                         </div>
                     {% endfor %}
                 </ul>
@@ -27,7 +30,8 @@
                 <input id="client" name="client" type="text"></input>
                 <button class="btn-default" type="submit">Add client</button>
             </form>
-        </div>
+        </div></br>
+        <a href="/">Return to Home Page</a>
     </div>
 </body>
 </html>
