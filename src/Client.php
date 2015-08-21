@@ -69,6 +69,9 @@
         static function deleteAll() {
             $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
+        function deleteOne() {
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = ('{$this->getId()}');");
+        }
 
         function update() {
              $GLOBALS['DB']->exec("UPDATE clients SET client_name = ('{$this->getClientName()}') WHERE id = ('{$this->getId()}');");

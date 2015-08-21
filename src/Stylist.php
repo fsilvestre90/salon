@@ -74,6 +74,9 @@
             $GLOBALS['DB']->exec("DELETE FROM stylists;");
         }
 
+        function deleteOne() {
+            $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = ('{$this->getId()}');");
+        }
     }
 
  ?>

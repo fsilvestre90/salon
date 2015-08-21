@@ -21,13 +21,15 @@
 
     // ROUTES FOR STYLISTS
         $app->get('/', function() use ($app) {
-            return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+            $stylists = Stylist::getAll();
+            return $app['twig']->render('index.html.twig', array('stylists' => $stylists));
         });
 
         $app->post('/add_stylist', function() use ($app) {
             $new_stylist = new Stylist($_POST['stylist']);
             $new_stylist->save();
-            return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+            $stylists = Stylist::getAll();
+            return $app['twig']->render('index.html.twig', array('stylists' => $stylists));
         });
 
         $app->get('/update_stylist/{id}', function($id) use ($app) {
@@ -40,6 +42,13 @@
             $stylist->setStylistName($_POST['stylist']);
             $stylist->update();
             return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
+        });
+
+        $app->get('/remove_stylist/{id}', function($id) use ($app) {
+            $stylist = Stylist::find($id);
+            $stylist->deleteOne();
+            $stylists = Stylist::getAll();
+            return $app['twig']->render('index.html.twig', array('stylists' => $stylists));
         });
 
     //ROUTES FOR CLIENTS
@@ -70,6 +79,14 @@
             $client->setClientName($_POST['client']);
             $client->update();
             return $app['twig']->render('edit_client.html.twig', array('client' => $client));
+        });
+
+        $app->get('/remove_client/{id}', function($id) use ($app) {
+            $client = Client::find($id);
+            $client->deleteOne();
+            $stylist = Stylist::find($client->getStylistId());
+            $clients = $stylist->getClients();
+            return $app['twig']->render('clients.html.twig', array('stylist' => $stylist, 'clients' => $clients));
         });
 
     return $app;

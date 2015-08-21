@@ -17,6 +17,9 @@
                     {% for client in clients %}
                         <div class="row">
                             <li><a href="/update_client/{{ client.getId }}">{{ client.getClientName }}</a></li>
+                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                              <button type="button" class="btn btn-danger"><a href="/remove_client/{{ client.getId }}">Remove</a></button>
+                          </div>
                         </div>
                     {% endfor %}
                 </ul>
