@@ -19,7 +19,7 @@
         ));
     // ROUTES
 
-        // display index webpage
+    // ROUTES FOR STYLISTS
         $app->get('/', function() use ($app) {
             return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
         });
@@ -27,9 +27,22 @@
         $app->post('/add_stylist', function() use ($app) {
             $new_stylist = new Stylist($_POST['stylist']);
             $new_stylist->save();
-
             return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
         });
+
+        $app->get('/update_stylist/{id}', function($id) use ($app) {
+            $stylist = Stylist::find($id);
+            return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
+        });
+
+        $app->post('/update_stylist/{id}', function($id) use ($app) {
+            $stylist = Stylist::find($id);
+            $stylist->setStylistName($_POST['stylist']);
+            $stylist->update();
+            return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
+        });
+
+    //ROUTES FOR CLIENTS
 
         $app->get('/clients/{id}', function($id) use ($app) {
             $stylist = Stylist::find($id);

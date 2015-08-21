@@ -17,7 +17,11 @@
                     {% for stylist in stylists %}
                         <div class="row">
                             <li><a href="/clients/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></li>
-                        </div>
+                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                              <button type="button" class="btn btn-default"><a href="/update_stylist/{{ stylist.getId }}">Edit</a></button>
+                              <button type="button" class="btn btn-danger"><a href="/remove_stylist/{{ stylist.getId }}">Remove</a></button>
+                          </div>
+                        </div></br>
                     {% endfor %}
                 </ul>
                 {% else %}

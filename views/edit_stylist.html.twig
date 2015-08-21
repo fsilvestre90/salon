@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Hair Salon Management</title>
+</head>
+<body>
+    <div class='container'>
+        <div class="viewStylist">
+            <h1>Hair Salon Management System</h1>
+                <h3>Edit stylist profile for {{ stylist.getStylistName }}:</h3>
+                <form action="/update_stylist/{{ stylist.getId }}" method="post">
+                    <label for="stylist">Edit Name:</label>
+                    <input id="stylist" name="stylist" type="text"></input>
+                    <button class="btn-default" type="submit">Update</button>
+                </form></br>
+                <a href="/">Return to Previous Page</a>
+        </div>
+    </div>
+</body>
+</html>
