@@ -41,6 +41,39 @@
             return $stylists;
         }
 
+        static function find($searchId) {
+            $result_stylist = null;
+            $stylists = Stylist::getAll();
+            foreach($stylists as $stylist) {
+                $stylist_id = $stylist->getId();
+                if ($stylist_id == $searchId) {
+                    $result_stylist = $stylist;
+                }
+            }
+            return $result_stylist;
+
+        }
+
+        function getClients() {
+            $clients = array();
+            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()};");
+            foreach($returned_clients as $client) {
+                $client_name = $client['client_name'];
+                $id = $client['id'];
+                $stylist_id = $client['stylist_id'];
+                $new_client = new Client($client_name, $stylist_id, $id);
+                array_push($clients, $new_client);
+            }
+            return $clients;
+        }
+        function update() {
+             $GLOBALS['DB']->exec("UPDATE stylists SET stylist_name = ('{$this->getStylistName()}') WHERE id = ('{$this->getId()}');");
+        }
+
+        static function deleteAll() {
+            $GLOBALS['DB']->exec("DELETE FROM stylists;");
+        }
+
     }
 
  ?>
