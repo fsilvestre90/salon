@@ -9,10 +9,17 @@
 This is a salon management application for salon workers to use and track their clientelle.
 
 ## Setup
-
-* Load PHP server inside the /../web/ folder using 'php -S localhost:8000'
-* Run 'composer install' inside the root folder to install dependencies
-* Import the 'salon.sql' file inside your phpmyadmin
+* Install Silex/Twig/PHPUnit via Composer in the project folder:
+```console
+$ composer install
+```
+* Start your local host in the web folder:
+```console
+$ php -S localhost:8000
+```
+* Import hair_salon.sql to your local server.
+* Navigate your browser to **localhost:8000**
+* To run tests using PHPUnit, create a copy of the database called **hair_salon_test**
 
 ## Technologies Used
 
