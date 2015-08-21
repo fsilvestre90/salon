@@ -6,26 +6,26 @@
 -- SET FOREIGN_KEY_CHECKS=0;
 
 -- ---
--- Table 'stylist'
+-- Table 'stylists'
 --
 -- ---
 
-DROP TABLE IF EXISTS `stylist`;
+DROP TABLE IF EXISTS `stylists`;
 
-CREATE TABLE `stylist` (
+CREATE TABLE `stylists` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `stylist_name` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
 -- ---
--- Table 'client'
+-- Table 'clients'
 --
 -- ---
 
-DROP TABLE IF EXISTS `client`;
+DROP TABLE IF EXISTS `clients`;
 
-CREATE TABLE `client` (
+CREATE TABLE `clients` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `client_name` VARCHAR(255) NULL DEFAULT NULL,
   `stylist_id` INTEGER NOT NULL,
@@ -36,20 +36,20 @@ CREATE TABLE `client` (
 -- Foreign Keys
 -- ---
 
-ALTER TABLE `client` ADD FOREIGN KEY (stylist_id) REFERENCES `stylist` (`id`);
+ALTER TABLE `clients` ADD FOREIGN KEY (stylist_id) REFERENCES `stylists` (`id`);
 
 -- ---
 -- Table Properties
 -- ---
 
--- ALTER TABLE `stylist` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `client` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `stylists` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `clients` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
 -- ---
 
--- INSERT INTO `stylist` (`id`,`stylist_name`) VALUES
+-- INSERT INTO `stylists` (`id`,`stylist_name`) VALUES
 -- ('','');
--- INSERT INTO `client` (`id`,`client_name`,`stylist_id`) VALUES
+-- INSERT INTO `clients` (`id`,`client_name`,`stylist_id`) VALUES
 -- ('','','');
