@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Hair Salon Management</title>
+</head>
+<body>
+    <div class='container'>
+        <div class="viewClients">
+            <h1>Hair Salon Management System</h1>
+                {% if clients is not empty %}
+                <h3>Current clients for {{ stylist.getStylistName }}:</h3>
+                <ul>
+                    {% for client in clients %}
+                        <div class="row">
+                            <li>{{ client.getClientName }}</li>
+                        </div>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <h3>It seems {{stylist.getStylistName}} has no clients!</h3>
+                {% endif %}
+        </div></br>
+        <div class="addClients">
+            <form action="/clients/{{ stylist.getId }}" method="post">
+                <label for="client">Client Name:</label>
+                <input id="client" name="client" type="text"></input>
+                <button class="btn-default" type="submit">Add client</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

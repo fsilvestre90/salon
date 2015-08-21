@@ -2,12 +2,35 @@
 <html>
 <head>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-    <title>Index</title>
+    <title>Hair Salon Management</title>
 </head>
 <body>
     <div class='container'>
-        <h1>Index</h1>
-        <p>You can start making your web applications!</p>
+        <div class="viewStylists">
+            <h1>Hair Salon Management System</h1>
+                {% if stylists is not empty %}
+                <h3>Current stylists:</h3>
+                <p>
+                    Click on stylist to view their client roster.
+                </p>
+                <ul>
+                    {% for stylist in stylists %}
+                        <div class="row">
+                            <li><a href="/clients/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></li>
+                        </div>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <h3>No Stylists in your Salon!</h3>
+                {% endif %}
+        </div>
+        <div class="addStylists">
+            <form action="/add_stylist" method="post">
+                <label for="stylist">Stylist Name:</label>
+                <input id="stylist" name="stylist" type="text"></input>
+                <button class="btn-default" type="submit">Add Stylist</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

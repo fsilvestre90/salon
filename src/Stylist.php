@@ -56,7 +56,7 @@
 
         function getClients() {
             $clients = array();
-            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()};");
+            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = ('{$this->getId()}');");
             foreach($returned_clients as $client) {
                 $client_name = $client['client_name'];
                 $id = $client['id'];
