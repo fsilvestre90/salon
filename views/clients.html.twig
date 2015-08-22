@@ -15,10 +15,10 @@
                         {% for client in clients %}
                             <div class="row">
                                 <li><a href="/update_client/{{ client.getId }}">{{ client.getClientName }}</a></li>
-                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                <div class="btn-group">
                                     <form action="/remove_client/{{ client.getId }}" method="post">
                                         <input name="_method" type="hidden" value="delete">
-                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                     </form>
                               </div>
                             </div>

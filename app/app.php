@@ -6,7 +6,7 @@
 
         use Symfony\Component\HttpFoundation\Request;
         Request::enableHttpMethodParameterOverride();
-        
+
     // INITIALIZE Database SESSION
         try{
             $server = 'mysql:host=localhost:8889;dbname=hair_salon';
@@ -39,9 +39,7 @@
         });
 
         $app->get('/update_stylist/{id}', function($id) use ($app) {
-            var_dump($id);
             $stylist = Stylist::find($id);
-            var_dump($stylist);
             return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
         });
 
