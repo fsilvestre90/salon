@@ -1,6 +1,7 @@
 <?php
 
     class Client {
+        
         private $id;
         private $client_name;
         private $stylist_id;
@@ -36,13 +37,23 @@
         }
 
         function save() {
-            $GLOBALS['DB']->exec("INSERT INTO clients (client_name, stylist_id) VALUES ('{$this->getClientName()}', {$this->getStylistId()});");
+            try {
+                $GLOBALS['DB']->exec("INSERT INTO clients (client_name, stylist_id) VALUES ('{$this->getClientName()}', {$this->getStylistId()});");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
+
             $result_id = $GLOBALS['DB']->lastInsertId();
             $this->setId($result_id);
          }
 
         static function getAll() {
-            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");
+            try {
+                $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
+
             $clients = array();
             foreach($returned_clients as $client) {
                 $client_name = $client['client_name'];
@@ -51,6 +62,7 @@
                 $new_client = new Client($client_name, $stylist_id, $id);
                 array_push($clients, $new_client);
             }
+
             return $clients;
         }
 
@@ -67,16 +79,29 @@
         }
 
         static function deleteAll() {
-            $GLOBALS['DB']->exec("DELETE FROM clients;");
+            try {
+                $GLOBALS['DB']->exec("DELETE FROM clients;");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
         }
+
         function deleteOne() {
-            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = ('{$this->getId()}');");
+            try {
+                $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = ('{$this->getId()}');");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
         }
 
         function update() {
-             $GLOBALS['DB']->exec("UPDATE clients SET client_name = ('{$this->getClientName()}') WHERE id = ('{$this->getId()}');");
+            try {
+                $GLOBALS['DB']->exec("UPDATE clients SET client_name = ('{$this->getClientName()}') WHERE id = ('{$this->getId()}');");
+
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
         }
     }
-
 
  ?>

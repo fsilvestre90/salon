@@ -1,15 +1,22 @@
 <?php
-
     // DEPENDENCIES
         require_once __DIR__."/../vendor/autoload.php"; // frameworks
         require_once __DIR__."/../src/Stylist.php";
         require_once __DIR__."/../src/Client.php";
 
+        use Symfony\Component\HttpFoundation\Request;
+        Request::enableHttpMethodParameterOverride();
+        
     // INITIALIZE Database SESSION
-        $server = 'mysql:host=localhost:8889;dbname=hair_salon';
-        $username = 'root';
-        $password = 'root';
-        $DB = new PDO($server, $username, $password);
+        try{
+            $server = 'mysql:host=localhost:8889;dbname=hair_salon';
+            $username = 'root';
+            $password = 'root';
+            $DB = new PDO($server, $username, $password);
+            $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set Errorhandling to Exception
+        } catch (PDOException $e) {
+            echo "There was an error: " . $e->getMessage();
+        }
 
 
     // INITIALIZE APPLICATION
@@ -17,7 +24,6 @@
         $app->register(new Silex\Provider\TwigServiceProvider(), array(
             'twig.path' => __DIR__."/../views"
         ));
-    // ROUTES
 
     // ROUTES FOR STYLISTS
         $app->get('/', function() use ($app) {
@@ -33,18 +39,20 @@
         });
 
         $app->get('/update_stylist/{id}', function($id) use ($app) {
+            var_dump($id);
             $stylist = Stylist::find($id);
+            var_dump($stylist);
             return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
         });
 
-        $app->post('/update_stylist/{id}', function($id) use ($app) {
+        $app->patch('/update_stylist/{id}', function($id) use ($app) {
             $stylist = Stylist::find($id);
             $stylist->setStylistName($_POST['stylist']);
             $stylist->update();
             return $app['twig']->render('edit_stylist.html.twig', array('stylist' => $stylist));
         });
 
-        $app->get('/remove_stylist/{id}', function($id) use ($app) {
+        $app->delete('/remove_stylist/{id}', function($id) use ($app) {
             $stylist = Stylist::find($id);
             $stylist->deleteOne();
             $stylists = Stylist::getAll();
@@ -74,14 +82,14 @@
             return $app['twig']->render('edit_client.html.twig', array('client' => $client));
         });
 
-        $app->post('/update_client/{id}', function($id) use ($app) {
+        $app->patch('/update_client/{id}', function($id) use ($app) {
             $client = Client::find($id);
             $client->setClientName($_POST['client']);
             $client->update();
             return $app['twig']->render('edit_client.html.twig', array('client' => $client));
         });
 
-        $app->get('/remove_client/{id}', function($id) use ($app) {
+        $app->delete('/remove_client/{id}', function($id) use ($app) {
             $client = Client::find($id);
             $client->deleteOne();
             $stylist = Stylist::find($client->getStylistId());

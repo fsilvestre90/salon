@@ -10,8 +10,9 @@
             <h1>Hair Salon Management System</h1>
                 <h3>Edit client profile for {{ client.getClientName }}:</h3>
                 <form action="/update_client/{{ client.getId }}" method="post">
+                    <input name="_method" type="hidden" value="patch"></input>
                     <label for="client">Edit Name:</label>
-                    <input id="client" name="client" type="text"></input>
+                    <input name="client" type="text">
                     <button class="btn-default" type="submit">Update</button>
                 </form></br>
                 <a href="/clients/{{ client.getStylistId }}">Return to Previous Page</a>

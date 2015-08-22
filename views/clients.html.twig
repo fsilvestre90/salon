@@ -9,22 +9,23 @@
         <div class="viewClients">
             <h1>Hair Salon Management System</h1>
                 {% if clients is not empty %}
-                <p>
-                    Click on a client to edit their name
-                </p>
-                <h3>Current clients for {{ stylist.getStylistName }}:</h3>
-                <ul>
-                    {% for client in clients %}
-                        <div class="row">
-                            <li><a href="/update_client/{{ client.getId }}">{{ client.getClientName }}</a></li>
-                            <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                              <button type="button" class="btn btn-danger"><a href="/remove_client/{{ client.getId }}">Remove</a></button>
-                          </div>
-                        </div>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                    <h3>It seems {{stylist.getStylistName}} has no clients!</h3>
+                <h4>Click on a client to edit their name</h4>
+                    <h5>Current clients for {{ stylist.getStylistName }}:</h5>
+                    <ul>
+                        {% for client in clients %}
+                            <div class="row">
+                                <li><a href="/update_client/{{ client.getId }}">{{ client.getClientName }}</a></li>
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <form action="/remove_client/{{ client.getId }}" method="post">
+                                        <input name="_method" type="hidden" value="delete">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                              </div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <h5>It seems {{stylist.getStylistName}} has no clients!</h5>
                 {% endif %}
         </div></br>
         <div class="addClients">

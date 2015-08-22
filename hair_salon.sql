@@ -36,7 +36,7 @@ CREATE TABLE `clients` (
 -- Foreign Keys
 -- ---
 
-ALTER TABLE `clients` ADD FOREIGN KEY (stylist_id) REFERENCES `stylists` (`id`);
+ALTER TABLE `clients` ADD FOREIGN KEY (stylist_id) REFERENCES `stylists` (`id`) ON DELETE CASCADE;
 
 -- ---
 -- Table Properties
