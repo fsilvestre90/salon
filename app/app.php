@@ -9,7 +9,7 @@
 
     // INITIALIZE Database SESSION
         try{
-            $server = 'mysql:host=localhost:8889;dbname=hair_salon';
+            $server = 'mysql:host=localhost;dbname=hair_salon';
             $username = 'root';
             $password = 'root';
             $DB = new PDO($server, $username, $password);
@@ -21,6 +21,7 @@
 
     // INITIALIZE APPLICATION
         $app = new Silex\Application();
+        $app['debug'] = true;
         $app->register(new Silex\Provider\TwigServiceProvider(), array(
             'twig.path' => __DIR__."/../views"
         ));

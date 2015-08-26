@@ -17,6 +17,34 @@
             Client::deleteAll();
         }
 
+        function testGetId() {
+            //Arrange
+            $Client_name = "Suzie";
+            $stylist_id = 1;
+            $test_Client = new Client($Client_name, $stylist_id);
+            $test_Client->save();
+
+            //Act
+            $result = $test_Client->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+        }
+
+        function testGetClientName() {
+            //Arrange
+            $Client_name = "Suzie";
+            $stylist_id = 1;
+            $test_Client = new Client($Client_name, $stylist_id);
+            $test_Client->save();
+
+            //Act
+            $result = $test_Client->getClientName();
+
+            //Assert
+            $this->assertEquals("Suzie", $result);
+        }
+
         function test_save()
         {
             //Arrange
@@ -61,7 +89,7 @@
             //Assert
             $this->assertEquals($test_Client, $result);
         }
-        
+
         function test_update() {
             //Arrange
             $Client_name = "Neil";

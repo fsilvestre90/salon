@@ -18,6 +18,29 @@
             Stylist::deleteAll();
             Client::deleteAll();
         }
+        function testGetId() {
+            //Arrange
+            $stylist_name = "Suzie";
+            $test_stylist = new Stylist($stylist_name);
+            $test_stylist->save();
+
+            //Act
+            $result = $test_stylist->getId();
+            //Assert
+            $this->assertEquals($test_stylist->getId(), $result);
+        }
+
+        function testGetStylist() {
+            //Arrange
+            $stylist_name = "Suzie";
+            $test_stylist = new Stylist($stylist_name);
+            $test_stylist->save();
+
+            //Act
+            $result = $test_stylist->getStylistName();
+            //Assert
+            $this->assertEquals("Suzie", $result);
+        }
 
         function test_save()
         {
