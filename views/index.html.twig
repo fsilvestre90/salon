@@ -19,8 +19,7 @@
                             <li><a href="/clients/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></li>
                             <div class="btn-group btn-group-xs">
                               <div class="btn-group">
-                                  <form action="/update_stylist/{{ stylist.getId }}" method="post">
-                                      <input name="_method" type="hidden" value="patch">
+                                  <form action="/update_stylist/{{ stylist.getId }}" method="get">
                                       <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                   </form>
                               </div>
@@ -39,9 +38,8 @@
                 {% endif %}
         </div>
         <div class="btn">
-            <form action="/clearStylists/" method="post">
-                <input name="_method" type="hidden" value="delete">
-                <button type="submit" class="btn btn-danger btn-sm">Clear All</button>
+            <form action="/delete_stylists" method="post">
+                    <button class="btn btn-danger" type="submit">Clear</button>
             </form>
         </div>
         <div class="addStylists">

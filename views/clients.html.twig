@@ -28,6 +28,11 @@
                         <h5>It seems {{stylist.getStylistName}} has no clients!</h5>
                 {% endif %}
         </div></br>
+        <div class="btn">
+            <form action="/delete_clients/{{ stylist.getId }}" method="post">
+                     <button class="btn btn-danger" type="submit">Clear</button>
+            </form>
+        </div>
         <div class="addClients">
             <form action="/clients/{{ stylist.getId }}" method="post">
                 <label for="client">Client Name:</label>

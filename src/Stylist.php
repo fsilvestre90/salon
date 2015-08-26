@@ -48,7 +48,7 @@
                 $new_stylist = new Stylist($stylist_name, $id);
                 array_push($stylists, $new_stylist);
             }
-            
+
             return $stylists;
         }
 
@@ -94,6 +94,13 @@
         static function deleteAll() {
             try {
                 $GLOBALS['DB']->exec("DELETE FROM stylists;");
+            } catch (PDOException $e) {
+                echo "There was an error: " . $e->getMessage();
+            }
+        }
+        function deleteAllClients() {
+            try {
+                $GLOBALS['DB']->exec("DELETE FROM clients where stylist_id = {$this->getId()};");
             } catch (PDOException $e) {
                 echo "There was an error: " . $e->getMessage();
             }
